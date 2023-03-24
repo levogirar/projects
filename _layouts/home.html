@@ -1,0 +1,101 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+
+  <div class="subtitle">
+    {{ content }}
+  </div>
+
+  {%- if site.posts.size > 0 -%}
+    <ul class="post-list">
+      {%- for post in site.posts -%}
+      <li>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+          <p>
+            {% if post.category == "photography" %}
+              📸
+            {% elsif post.category == "design" %}
+              ✏️
+            {% else %}
+              👋🏼
+            {% endif %}
+          </p>
+          {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+          <!-- <span class="post-meta">{{ post.date | date: date_format }}</span> -->
+          <h3>{{ post.title | escape }}</h3>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+</div>
+
+<style>
+
+  .home {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 80px;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    max-width: 50ch;
+    color: var(--grey700);
+  }
+
+  .subtitle strong {
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  .post-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 16px;
+    padding-inline-start: 0;
+  }
+
+  .post-list li {
+    display: flex;
+  }
+
+  .post-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 160px;
+    border: solid 1px var(--grey200);
+    border-radius: 8px;
+    padding: 16px;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .post-link:hover {
+    background-color: var(--white);
+    border: solid 1px var(--grey500);
+  }
+
+  .post-link p {
+    margin-bottom: 8px;
+    font-size: 2rem;;
+  }
+
+  .post-link h3 {
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--grey700);
+  }
+
+</style>
